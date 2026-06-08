@@ -26,7 +26,7 @@ const EMPTY_FILTER: FilterState = {
 type ResolvedConfig = CardConfig & {
   cameras: string[];
   default_mode: CardMode;
-  columns: number;
+  columns?: number; // undefined = responsive auto-fit
   snapshot_refresh: number;
   library_days: number;
 };
@@ -54,7 +54,7 @@ export class ArloCameraCard extends LitElement {
       ...config,
       cameras: config.cameras ?? [],
       default_mode: mode,
-      columns: config.columns ?? 3,
+      columns: config.columns,
       snapshot_refresh: config.snapshot_refresh ?? 10,
       library_days: config.library_days ?? 7,
     };

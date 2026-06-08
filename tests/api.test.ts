@@ -45,14 +45,16 @@ describe("fetchLibrary", () => {
 });
 
 describe("fetchStreamUrl", () => {
-  it("returns the url field", async () => {
-    const callWS = vi.fn().mockResolvedValue({ url: "https://hls" });
+  it("uses HA's camera/stream proxy (HLS) and returns the url field", async () => {
+    const callWS = vi
+      .fn()
+      .mockResolvedValue({ url: "/api/hls/abc/master_playlist.m3u8" });
     const url = await fetchStreamUrl(fakeHass(callWS), "camera.front");
     expect(callWS).toHaveBeenCalledWith({
-      type: "aarlo_stream_url",
+      type: "camera/stream",
       entity_id: "camera.front",
     });
-    expect(url).toBe("https://hls");
+    expect(url).toBe("/api/hls/abc/master_playlist.m3u8");
   });
 });
 

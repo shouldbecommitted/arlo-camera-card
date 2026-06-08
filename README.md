@@ -9,8 +9,10 @@ recordings review in one card.
 - **Recordings mode** — newest-first thumbnail grid grouped by day, with camera
   and trigger filters; tap a clip to play, with prev/next to move through events.
 
-Works on phone (companion app) and desktop/tablet — the grids reflow to two
-columns on narrow screens.
+Works on phone (companion app) and desktop/tablet — the grids auto-fit to the
+card's width, so tiles stay a sensible size whether the card sits in a narrow
+sections column or a full-width view. To get larger tiles on desktop, place the
+card in a wider/full-width section.
 
 ## Requirements
 
@@ -38,7 +40,7 @@ cameras:
   - camera.aarlo_pool
   - camera.aarlo_laundry
 default_mode: live        # live | recordings
-columns: 3                # desktop columns; narrow screens force 2
+columns: 3                # OPTIONAL fixed column count; omit for responsive auto-fit
 snapshot_refresh: 10      # seconds between live-grid snapshot refreshes
 library_days: 7           # days of recordings to request
 ```

@@ -3,6 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import { DayGroup, toMs } from "./grouping";
 import { LibraryItem } from "./types";
 import { mapTrigger } from "./filters";
+import { gridTemplate } from "./layout";
 
 const TZ = "Pacific/Auckland";
 
@@ -26,20 +27,15 @@ function durationLabel(item: LibraryItem): string {
 @customElement("arlo-recordings-grid")
 export class ArloRecordingsGrid extends LitElement {
   @property({ attribute: false }) groups: DayGroup[] = [];
-  @property({ type: Number }) columns = 3;
+  /** fixed desktop column count; 0/undefined = responsive auto-fit */
+  @property({ type: Number }) columns = 0;
   @property({ type: Boolean }) loading = false;
   @property() error = "";
 
   static styles = css`
     .grid {
       display: grid;
-      grid-template-columns: repeat(var(--cols, 3), 1fr);
       gap: 8px;
-    }
-    @media (max-width: 480px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
     }
     .day {
       grid-column: 1 / -1;
@@ -125,9 +121,8 @@ export class ArloRecordingsGrid extends LitElement {
     if (this.groups.length === 0)
       return html`<div class="state">No recordings for this filter.</div>`;
 
-    this.style.setProperty("--cols", String(this.columns));
     return html`
-      <div class="grid">
+      <div class="grid" style="grid-template-columns:${gridTemplate(this.columns)}">
         ${this.groups.map(
           (g) => html`
             <div class="day">${g.label}</div>

@@ -6,7 +6,7 @@ describe("ArloCameraCard.setConfig", () => {
     const card = new ArloCameraCard();
     card.setConfig({ type: "custom:arlo-camera-card" });
     const cfg = (card as any)._config;
-    expect(cfg.columns).toBe(3);
+    expect(cfg.columns).toBeUndefined(); // responsive auto-fit by default
     expect(cfg.snapshot_refresh).toBe(10);
     expect(cfg.library_days).toBe(7);
     expect(cfg.default_mode).toBe("live");

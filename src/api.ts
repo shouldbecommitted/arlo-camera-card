@@ -37,12 +37,20 @@ export async function fetchLibrary(
   }));
 }
 
+/**
+ * Get a browser-playable live stream URL.
+ *
+ * We deliberately use Home Assistant's native `camera/stream` command rather
+ * than aarlo's `aarlo_stream_url`: the latter returns an MPEG-DASH (or RTSPS)
+ * source that hls.js cannot play. `camera/stream` proxies the camera through
+ * HA's stream integration and returns an HLS `.m3u8` URL that hls.js plays.
+ */
 export async function fetchStreamUrl(
   hass: HomeAssistant,
   entityId: string
 ): Promise<string> {
   const res = await hass.callWS<{ url: string }>({
-    type: "aarlo_stream_url",
+    type: "camera/stream",
     entity_id: entityId,
   });
   return res.url;

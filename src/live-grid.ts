@@ -1,7 +1,8 @@
-import { LitElement, html, css, PropertyValues } from "lit";
+import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { HomeAssistant } from "custom-card-helpers";
 import { CameraTile } from "./types";
+import { gridTemplate } from "./layout";
 
 /** Pure: build a tile view-model for one camera from hass state. */
 export function cameraTile(hass: HomeAssistant, entityId: string): CameraTile {
@@ -25,7 +26,8 @@ export function cameraTile(hass: HomeAssistant, entityId: string): CameraTile {
 export class ArloLiveGrid extends LitElement {
   @property({ attribute: false }) hass!: HomeAssistant;
   @property({ attribute: false }) cameras: string[] = [];
-  @property({ type: Number }) columns = 3;
+  /** fixed desktop column count; 0/undefined = responsive auto-fit */
+  @property({ type: Number }) columns = 0;
   /** snapshot refresh interval (seconds); 0 disables */
   @property({ type: Number }) refresh = 10;
 
@@ -50,13 +52,7 @@ export class ArloLiveGrid extends LitElement {
   static styles = css`
     .grid {
       display: grid;
-      grid-template-columns: repeat(var(--cols, 3), 1fr);
       gap: 8px;
-    }
-    @media (max-width: 480px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
     }
     .cam {
       position: relative;
@@ -126,13 +122,9 @@ export class ArloLiveGrid extends LitElement {
     );
   }
 
-  protected willUpdate(_changed: PropertyValues): void {
-    this.style.setProperty("--cols", String(this.columns));
-  }
-
   render() {
     return html`
-      <div class="grid">
+      <div class="grid" style="grid-template-columns:${gridTemplate(this.columns)}">
         ${this.cameras.map((id) => {
           const t = cameraTile(this.hass, id);
           const src = t.snapshot

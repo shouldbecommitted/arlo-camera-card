@@ -90,6 +90,12 @@ export class ArloPlayerDialog extends LitElement {
   private _load() {
     if (!this.source) return;
     const url = this.source.url;
+    // Live opens with an empty url while the stream URL is fetched; stay in the
+    // loading state until the real url arrives (a second `source` update).
+    if (!url) {
+      this._status = "loading";
+      return;
+    }
     this._status = "loading";
     this._timeout = window.setTimeout(() => {
       if (this._status === "loading") this._status = "error";
