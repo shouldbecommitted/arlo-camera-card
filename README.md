@@ -34,11 +34,10 @@ card in a wider/full-width section.
 type: custom:arlo-camera-card
 # All options are optional; cameras defaults to every camera.aarlo_* entity.
 cameras:
-  - camera.aarlo_doorbell
-  - camera.aarlo_front
-  - camera.aarlo_garden
-  - camera.aarlo_pool
-  - camera.aarlo_laundry
+  - camera.aarlo_front_door
+  - camera.aarlo_driveway
+  - camera.aarlo_backyard
+  - camera.aarlo_side_gate
 default_mode: live        # live | recordings
 columns: 3                # OPTIONAL fixed column count; omit for responsive auto-fit
 snapshot_refresh: 10      # seconds between live-grid snapshot refreshes
