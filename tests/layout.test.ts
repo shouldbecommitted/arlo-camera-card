@@ -2,8 +2,8 @@ import { describe, it, expect } from "vitest";
 import { gridTemplate } from "../src/layout";
 
 describe("gridTemplate", () => {
-  it("auto-fits with a minimum tile width when no fixed column count", () => {
-    const expected = "repeat(auto-fill, minmax(min(100%, 180px), 1fr))";
+  it("auto-fits (stretching tiles to fill width) when no fixed column count", () => {
+    const expected = "repeat(auto-fit, minmax(min(100%, 220px), 1fr))";
     expect(gridTemplate(undefined)).toBe(expected);
     expect(gridTemplate(0)).toBe(expected);
   });
