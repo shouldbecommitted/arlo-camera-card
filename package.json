@@ -1,6 +1,6 @@
 {
   "name": "arlo-camera-card",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "A responsive Home Assistant Lovelace card for Arlo cameras: live view + recordings, on top of hass-aarlo.",
   "license": "MIT",
   "type": "module",
@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^6.0.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
     "jsdom": "^24.1.0",

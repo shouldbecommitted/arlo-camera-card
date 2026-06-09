@@ -7,12 +7,14 @@ import { applyFilters } from "./filters";
 import { groupByDay, DayGroup } from "./grouping";
 import { cameraTile } from "./live-grid";
 import { PlayerSource } from "./player-dialog";
+import { CARD_VERSION } from "./version";
 
 // Pull in the sub-components so customElements are defined in the bundle.
 import "./live-grid";
 import "./filter-bar";
 import "./recordings-grid";
 import "./player-dialog";
+import "./editor";
 
 const TZ = "Pacific/Auckland";
 
@@ -59,6 +61,11 @@ export class ArloCameraCard extends LitElement {
       library_days: config.library_days ?? 7,
     };
     this._mode = mode;
+  }
+
+  /** Lovelace visual editor for this card. */
+  static getConfigElement(): HTMLElement {
+    return document.createElement("arlo-camera-card-editor");
   }
 
   /** Default config when added from the card picker. */
@@ -247,4 +254,12 @@ export class ArloCameraCard extends LitElement {
   name: "Arlo Camera Card",
   description: "Live view + recordings for Arlo cameras (requires hass-aarlo).",
   preview: false,
+  documentationURL: "https://github.com/shouldbecommitted/arlo-camera-card",
 });
+
+// eslint-disable-next-line no-console
+console.info(
+  `%c ARLO-CAMERA-CARD %c v${CARD_VERSION} `,
+  "color: white; background: #0a84ff; font-weight: 700;",
+  "color: #0a84ff; background: #1c1c1e; font-weight: 700;"
+);

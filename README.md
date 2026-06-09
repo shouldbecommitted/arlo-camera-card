@@ -22,8 +22,8 @@ card in a wider/full-width section.
 
 ## Installation (HACS)
 
-1. HACS → Frontend → ⋮ → Custom repositories → add this repo URL, category
-   "Lovelace".
+1. HACS → ⋮ → Custom repositories → add this repo URL, type "Dashboard"
+   (called "Lovelace" on HACS versions before 2.0).
 2. Install "Arlo Camera Card".
 3. The resource `/hacsfiles/arlo-camera-card/arlo-camera-card.js` is added
    automatically.

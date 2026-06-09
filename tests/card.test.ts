@@ -34,3 +34,26 @@ describe("ArloCameraCard.setConfig", () => {
     expect(stub.cameras).toEqual(["camera.aarlo_front"]);
   });
 });
+
+describe("ArloCameraCard visual editor", () => {
+  it("getConfigElement returns the editor element", () => {
+    const el = ArloCameraCard.getConfigElement();
+    expect(el.tagName.toLowerCase()).toBe("arlo-camera-card-editor");
+  });
+
+  it("editor emits config-changed from a ha-form value-changed", () => {
+    const el = ArloCameraCard.getConfigElement() as any;
+    el.hass = { states: {} };
+    el.setConfig({ type: "custom:arlo-camera-card" });
+    let emitted: any;
+    el.addEventListener("config-changed", (e: CustomEvent) => {
+      emitted = e.detail.config;
+    });
+    el._valueChanged(
+      new CustomEvent("value-changed", {
+        detail: { value: { type: "custom:arlo-camera-card", library_days: 14 } },
+      })
+    );
+    expect(emitted).toEqual({ type: "custom:arlo-camera-card", library_days: 14 });
+  });
+});
