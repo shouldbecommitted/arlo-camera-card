@@ -14,6 +14,15 @@ card's width, so tiles stay a sensible size whether the card sits in a narrow
 sections column or a full-width view. To get larger tiles on desktop, place the
 card in a wider/full-width section.
 
+## Screenshots
+
+| Live | Recordings |
+| --- | --- |
+| ![Live view](images/live-view.png) | ![Recordings view](images/recordings.png) |
+
+> Camera tiles above are placeholders; in use they show your live snapshots and
+> recording thumbnails.
+
 ## Requirements
 
 - The [hass-aarlo](https://github.com/twrecked/hass-aarlo) integration installed
